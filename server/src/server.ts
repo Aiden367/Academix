@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import pool from './config/database';
+import scraperRoutes from './routes/scraperRoutes';
 
 dotenv.config();
 
@@ -35,7 +36,11 @@ app.get('/health', async (_req: Request, res: Response) => {
   }
 });
 
+// Scraper routes
+app.use('/api/scraper', scraperRoutes);
+
 // Start server
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`📚 Scraper API available at http://localhost:${port}/api/scraper`);
 });
